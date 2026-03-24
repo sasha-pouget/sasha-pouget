@@ -239,15 +239,20 @@
       transition: opacity 0.2s;
     }
     #lightbox-close:hover { opacity: 1; }
+    #lb-wrapper {
+      position: relative; display: inline-flex;
+      align-items: center; justify-content: center;
+    }
     .lb-nav {
       position: absolute; top: 50%; transform: translateY(-50%);
-      color: #fff; font-size: 2rem; cursor: pointer;
-      background: none; border: none; opacity: 0.5;
-      transition: opacity 0.2s; padding: 1rem; user-select: none;
+      color: #fff; font-size: 2.5rem; cursor: pointer;
+      background: none; border: none; opacity: 0.6;
+      transition: opacity 0.2s; padding: 0.5rem; user-select: none;
+      line-height: 1;
     }
     .lb-nav:hover { opacity: 1; }
-    #lb-prev { left: 1rem; }
-    #lb-next { right: 1rem; }
+    #lb-prev { right: calc(100% + 0.5rem); }
+    #lb-next { left: calc(100% + 0.5rem); }
 
     /* ── Contact ── */
     #contact {
@@ -453,8 +458,10 @@
   <!-- Lightbox -->
   <div id="lightbox">
     <button id="lightbox-close">&times;</button>
-    <button class="lb-nav" id="lb-prev">&#8249;</button>
-    <button class="lb-nav" id="lb-next">&#8250;</button>
+    <div id="lb-wrapper">
+      <button class="lb-nav" id="lb-prev">&#8249;</button>
+      <button class="lb-nav" id="lb-next">&#8250;</button>
+    </div>
   </div>
 
   <!-- Footer -->
@@ -527,6 +534,7 @@
 
     // Lightbox logic
     const lb = document.getElementById('lightbox');
+    const lbWrapper = document.getElementById('lb-wrapper');
     const closeBtn = document.getElementById('lightbox-close');
     const prevBtn = document.getElementById('lb-prev');
     const nextBtn = document.getElementById('lb-next');
@@ -550,7 +558,7 @@
         lbMedia.autoplay = true;
         lbMedia.playsInline = true;
       }
-      lb.appendChild(lbMedia);
+      lbWrapper.appendChild(lbMedia);
       lb.classList.add('open');
       document.body.style.overflow = 'hidden';
     }
