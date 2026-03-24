@@ -627,7 +627,7 @@
         smoothScrollTo(document.getElementById(id).offsetTop, 200);
         if (id === 'hero') setTimeout(triggerHeroAnim, 380);
         if (id === 'about') { _aboutVisited = true; setTimeout(triggerAboutAnim, 380); }
-        if (id === 'projets') { _projetsVisited = true; setTimeout(triggerProjetsAnim, 380); }
+        if (id === 'projets') { _projetsVisited = true; setTimeout(triggerProjetsAnim, 380); snapsActive = false; }
       }
 
       // Hero button: animated scroll to projets
@@ -636,23 +636,27 @@
         smoothScrollTo(document.getElementById('projets').offsetTop, 900);
       });
 
+      let snapsActive = true;
+      window.addEventListener('scroll', () => {
+        if (!snapsActive && window.scrollY < 80) snapsActive = true;
+      }, { passive: true });
+
       function handle(down) {
-        if (snapping) return true; // block
+        if (snapping) return true;
+        if (!snapsActive) return false;
         const sy = window.scrollY;
         const aboutEl  = document.getElementById('about');
         const aboutTop = aboutEl.offsetTop;
-        const aboutBottom = aboutTop + aboutEl.offsetHeight;
         const projetsTop = document.getElementById('projets').offsetTop;
-        const viewH = window.innerHeight;
-        if (sy >= projetsTop - 20) return false; // fully free zone
+        if (sy >= projetsTop - 20) return false;
 
-        // Hero zone → snap to about on scroll down
+        // Hero zone → snap to about
         if (sy < aboutTop - 60) {
           if (down) { snapTo('about'); return true; }
           return false;
         }
 
-        // About zone → snap to projets on any downward scroll, free scroll up
+        // About zone → snap to projets
         if (down) { snapTo('projets'); return true; }
         return false;
       }
