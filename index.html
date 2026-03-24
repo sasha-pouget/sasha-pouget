@@ -620,13 +620,14 @@
         requestAnimationFrame(tick);
       }
 
+      let _aboutVisited = false, _projetsVisited = false;
       function snapTo(id) {
-        if (id === 'about') resetAboutAnim();
-        if (id === 'projets') resetProjetsAnim();
+        if (id === 'about' && _aboutVisited) resetAboutAnim();
+        if (id === 'projets' && _projetsVisited) resetProjetsAnim();
         smoothScrollTo(document.getElementById(id).offsetTop, 450);
         if (id === 'hero') setTimeout(triggerHeroAnim, 380);
-        if (id === 'about') setTimeout(triggerAboutAnim, 380);
-        if (id === 'projets') setTimeout(triggerProjetsAnim, 380);
+        if (id === 'about') { _aboutVisited = true; setTimeout(triggerAboutAnim, 380); }
+        if (id === 'projets') { _projetsVisited = true; setTimeout(triggerProjetsAnim, 380); }
       }
 
       // Hero button: animated scroll to projets
@@ -825,7 +826,7 @@
         }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
 
     document.getElementById('langToggle').addEventListener('click', function() {
