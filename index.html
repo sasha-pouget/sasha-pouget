@@ -165,25 +165,28 @@
       padding-left: 1rem; position: relative; white-space: nowrap;
     }
     .about-side ul li::before { content: '–'; position: absolute; left: 0; color: #ccc; }
-    .key-numbers {
-      margin-top: 2rem; display: flex; flex-direction: column; gap: 1.1rem;
-      border-top: 1px solid #e8e8e8; padding-top: 1.8rem;
+    .about-stats {
+      display: flex; align-items: flex-end; gap: 4rem;
+      border-top: 1px solid #ddd; margin-top: 3rem; padding-top: 2rem;
+      max-width: 1100px; flex-wrap: wrap;
     }
-    .key-number { display: flex; flex-direction: column; gap: 0.15rem; }
+    .key-number { display: flex; flex-direction: column; gap: 0.2rem; }
     .kn-value {
       font-family: 'Playfair Display', serif;
-      font-size: 2rem; font-weight: 600; line-height: 1; color: #111;
+      font-size: 2.4rem; font-weight: 600; line-height: 1; color: #111;
       letter-spacing: -0.02em;
     }
-    .kn-plus { font-size: 1.2rem; vertical-align: super; margin-left: 1px; }
+    .kn-plus { font-size: 1.3rem; vertical-align: super; margin-left: 2px; }
     .kn-label {
-      font-size: 0.72rem; font-weight: 500;
-      letter-spacing: 0.1em; text-transform: uppercase; color: #999;
+      font-family: 'Playfair Display', serif;
+      font-size: 0.78rem; font-weight: 400; font-style: italic;
+      color: #888; letter-spacing: 0.02em;
     }
     .insta-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-top: 1.6rem; font-size: 0.78rem; font-weight: 500;
-      letter-spacing: 0.06em; color: #555; transition: color 0.2s;
+      margin-left: auto; font-size: 0.78rem; font-weight: 500;
+      font-family: 'Playfair Display', serif; font-style: italic;
+      letter-spacing: 0.04em; color: #777; transition: color 0.2s;
     }
     .insta-link:hover { color: #111; }
 
@@ -356,25 +359,25 @@
           <li>Master Management, HEC Lausanne (2025)</li>
           <li data-i18n="edu2">Bachelor Management & Économie, HEC Lausanne (2023)</li>
         </ul>
-        <div class="key-numbers">
-          <div class="key-number">
-            <span class="kn-value">30</span>
-            <span class="kn-label" data-i18n="kn_posters">affiches créées</span>
-          </div>
-          <div class="key-number">
-            <span class="kn-value">5</span>
-            <span class="kn-label" data-i18n="kn_videos">teasers & aftermovies</span>
-          </div>
-          <div class="key-number">
-            <span class="kn-value">6 800<span class="kn-plus">+</span></span>
-            <span class="kn-label" data-i18n="kn_followers">abonnés Instagram</span>
-          </div>
-        </div>
-        <a class="insta-link" href="https://www.instagram.com/comite_hec/" target="_blank" rel="noopener">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
-          <span data-i18n="kn_insta">@comite_hec</span>
-        </a>
       </div>
+    </div>
+    <div class="about-stats">
+      <div class="key-number">
+        <span class="kn-value">30</span>
+        <span class="kn-label" data-i18n="kn_posters">affiches créées</span>
+      </div>
+      <div class="key-number">
+        <span class="kn-value">5</span>
+        <span class="kn-label" data-i18n="kn_videos">teasers & aftermovies</span>
+      </div>
+      <div class="key-number">
+        <span class="kn-value">6 800<span class="kn-plus">+</span></span>
+        <span class="kn-label" data-i18n="kn_followers">abonnés Instagram</span>
+      </div>
+      <a class="insta-link" href="https://www.instagram.com/comite_hec/" target="_blank" rel="noopener">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4.5"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+        <span data-i18n="kn_insta">@comite_hec</span>
+      </a>
     </div>
     <a class="scroll-arrow dark" href="#projets"><span></span><i></i></a>
   </section>
