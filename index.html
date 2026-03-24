@@ -610,12 +610,12 @@
         const dist   = targetY - startY;
         if (Math.abs(dist) < 4) return;
         snapping = true;
+        setTimeout(() => { snapping = false; }, dur + 700); // cooldown starts now
         const t0 = performance.now();
         function tick(now) {
           const p = Math.min((now - t0) / dur, 1);
           window.scrollTo(0, startY + dist * ease(p));
           if (p < 1) requestAnimationFrame(tick);
-          else setTimeout(() => { snapping = false; }, 900);
         }
         requestAnimationFrame(tick);
       }
@@ -624,7 +624,7 @@
       function snapTo(id) {
         if (id === 'about' && _aboutVisited) resetAboutAnim();
         if (id === 'projets' && _projetsVisited) resetProjetsAnim();
-        smoothScrollTo(document.getElementById(id).offsetTop, 450);
+        smoothScrollTo(document.getElementById(id).offsetTop, 280);
         if (id === 'hero') setTimeout(triggerHeroAnim, 380);
         if (id === 'about') { _aboutVisited = true; setTimeout(triggerAboutAnim, 380); }
         if (id === 'projets') { _projetsVisited = true; setTimeout(triggerProjetsAnim, 380); }
