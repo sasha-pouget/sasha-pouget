@@ -701,9 +701,14 @@
     // ── About title re-animation ──
     function triggerAboutAnim() {
       const title = document.querySelector('#about .section-title');
+      title.style.transition = 'none';
       title.classList.remove('visible');
       title.style.transitionDelay = '0ms';
-      setTimeout(() => title.classList.add('visible'), 50);
+      void title.offsetHeight; // force reflow
+      setTimeout(() => {
+        title.style.transition = '';
+        title.classList.add('visible');
+      }, 50);
     }
 
     // ── Projets title re-animation ──
