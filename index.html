@@ -76,51 +76,45 @@
     /* ── Scroll arrow ── */
     .scroll-arrow {
       position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
-      z-index: 2; display: flex; flex-direction: column; align-items: center; gap: 6px;
-      cursor: pointer; text-decoration: none;
+      z-index: 2; cursor: pointer; text-decoration: none;
+      display: flex; flex-direction: column; align-items: center; gap: 8px;
     }
-    /* Ligne avec lumière qui glisse */
-    .scroll-arrow span {
-      display: block; width: 1px; height: 90px;
-      background: rgba(255,255,255,0.15);
-      position: relative; overflow: hidden;
-    }
-    .scroll-arrow span::after {
-      content: ''; position: absolute;
-      top: -60%; left: 0; width: 100%; height: 60%;
-      background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.9), transparent);
-      animation: lightSlide 1.8s cubic-bezier(.4,0,.2,1) infinite;
-    }
-    .scroll-arrow.dark span { background: rgba(0,0,0,0.12); }
-    .scroll-arrow.dark span::after {
-      background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.5), transparent);
-    }
-    /* Chevron double sobre */
+    .scroll-arrow span { display: none; }
     .scroll-arrow i {
-      display: block; width: 14px; height: 14px; position: relative;
+      display: block; width: 36px; height: 20px; position: relative;
     }
-    .scroll-arrow i::before,
+    /* Bras gauche du V */
+    .scroll-arrow i::before {
+      content: ''; position: absolute;
+      left: 0; top: 0;
+      width: 50%; height: 100%;
+      border-bottom: 1.5px solid rgba(255,255,255,0.75);
+      border-right: 1.5px solid rgba(255,255,255,0.75);
+      transform-origin: bottom right;
+      transform: skewX(30deg);
+    }
+    /* Bras droit du V */
     .scroll-arrow i::after {
-      content: ''; position: absolute; left: 0;
-      width: 14px; height: 7px;
-      border-left: 1px solid rgba(255,255,255,0.7);
-      border-bottom: 1px solid rgba(255,255,255,0.7);
-      transform: rotate(-45deg);
+      content: ''; position: absolute;
+      right: 0; top: 0;
+      width: 50%; height: 100%;
+      border-bottom: 1.5px solid rgba(255,255,255,0.75);
+      border-left: 1.5px solid rgba(255,255,255,0.75);
+      transform-origin: bottom left;
+      transform: skewX(-30deg);
     }
-    .scroll-arrow i::before { top: 0; animation: chevFade 1.8s ease infinite 0s; }
-    .scroll-arrow i::after  { top: 5px; animation: chevFade 1.8s ease infinite 0.2s; }
-    .scroll-arrow.dark i::before,
+    .scroll-arrow.dark i::before {
+      border-bottom-color: rgba(0,0,0,0.45);
+      border-right-color:  rgba(0,0,0,0.45);
+    }
     .scroll-arrow.dark i::after {
-      border-left-color: rgba(0,0,0,0.4);
-      border-bottom-color: rgba(0,0,0,0.4);
+      border-bottom-color: rgba(0,0,0,0.45);
+      border-left-color:   rgba(0,0,0,0.45);
     }
-    @keyframes lightSlide {
-      0%   { top: -60%; }
-      100% { top: 160%; }
-    }
-    @keyframes chevFade {
-      0%, 100% { opacity: 0.2; }
-      50%       { opacity: 1; }
+    .scroll-arrow i { animation: vPulse 2s ease-in-out infinite; }
+    @keyframes vPulse {
+      0%, 100% { opacity: 0.4; transform: translateY(-4px); }
+      50%       { opacity: 1;   transform: translateY(4px); }
     }
     .hero-btn {
       display: inline-block; padding: 0.85rem 2.5rem;
@@ -495,7 +489,7 @@
         if (Math.abs(dist) < 4) { snapping = false; return; }
         snapping = true;
         const t0 = performance.now();
-        const dur = 560;
+        const dur = 450;
         function tick(now) {
           const p = Math.min((now - t0) / dur, 1);
           window.scrollTo(0, startY + dist * ease(p));
