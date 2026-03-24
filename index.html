@@ -676,19 +676,23 @@
     const _heroEase = 'opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)';
     const _heroDelays = [50, 300, 550];
 
+    let _heroFirstLoad = true;
+
     function triggerHeroAnim() {
-      _heroEls.forEach(el => {
+      const els = _heroFirstLoad ? _heroEls : _heroEls.slice(1); // skip h1 on return
+      els.forEach(el => {
         el.style.transition = 'none';
         el.style.opacity = '0';
         el.style.transform = 'translateY(40px)';
       });
-      _heroEls.forEach((el, i) => {
+      els.forEach((el, i) => {
         setTimeout(() => {
           el.style.transition = _heroEase;
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
-        }, _heroDelays[i]);
+        }, _heroFirstLoad ? _heroDelays[i] : [50, 300][i]);
       });
+      _heroFirstLoad = false;
     }
 
     triggerHeroAnim();
