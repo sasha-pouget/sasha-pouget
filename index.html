@@ -40,13 +40,13 @@
       min-height: 100vh;
       display: flex; align-items: center; justify-content: flex-start;
       text-align: left; padding: 0 8vw;
-      background: url('site web/IMG_2638.JPG') 65% center / cover no-repeat;
+      background: url('site web/IMG_2638.JPG') calc(65% + 5cm) center / cover no-repeat;
       position: relative;
     }
     #hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0) 65%);
+      background: linear-gradient(to right, rgba(0,0,0,0.65) 0%, rgba(0,0,0,0.25) 35%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.25) 75%, rgba(0,0,0,0.65) 100%);
     }
     .hero-content { position: relative; z-index: 1; }
     .hero-content h1 {
