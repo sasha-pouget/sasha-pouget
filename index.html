@@ -142,6 +142,11 @@
       transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
     }
     .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-left {
+      opacity: 0; transform: translateX(-50px);
+      transition: opacity 0.8s cubic-bezier(.22,1,.36,1), transform 0.8s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal-left.visible { opacity: 1; transform: translateX(0); }
 
     /* ── À propos ── */
     #about { background: #f8f8f8; position: relative; }
@@ -368,8 +373,8 @@
 
   <!-- À propos -->
   <section id="about">
-    <p class="section-label reveal" data-i18n="about_label">Profil</p>
-    <h2 class="section-title reveal" data-i18n="about_title">À propos</h2>
+    <p class="section-label reveal-left" data-i18n="about_label">Profil</p>
+    <h2 class="section-title reveal-left" data-i18n="about_title">À propos</h2>
     <div class="about-grid">
       <div class="about-text" id="aboutText">
         <p class="reveal">
@@ -429,8 +434,8 @@
 
   <!-- Projets -->
   <section id="projets">
-    <p class="section-label reveal" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
-    <h2 class="section-title reveal" data-i18n="proj_title">Projets & Réalisations</h2>
+    <p class="section-label reveal-left" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
+    <h2 class="section-title reveal-left" data-i18n="proj_title">Projets & Réalisations</h2>
     <div class="projets-grid" id="projetsGrid"></div>
   </section>
 
@@ -703,23 +708,20 @@
       const title = document.querySelector('#about .section-title');
       title.style.transition = 'none';
       title.classList.remove('visible');
-      title.style.transitionDelay = '0ms';
-      void title.offsetHeight; // force reflow
-      setTimeout(() => {
-        title.style.transition = '';
-        title.classList.add('visible');
-      }, 50);
+      void title.offsetHeight;
+      setTimeout(() => { title.style.transition = ''; title.classList.add('visible'); }, 50);
     }
 
     // ── Projets title re-animation ──
     function triggerProjetsAnim() {
-      document.querySelectorAll('#projets .reveal').forEach(el => {
+      document.querySelectorAll('#projets .reveal-left').forEach(el => {
+        el.style.transition = 'none';
         el.classList.remove('visible');
-        el.style.transitionDelay = '0ms';
+        void el.offsetHeight;
       });
       setTimeout(() => {
-        document.querySelectorAll('#projets .reveal').forEach((el, i) => {
-          setTimeout(() => { el.classList.add('visible'); }, i * 120);
+        document.querySelectorAll('#projets .reveal-left').forEach((el, i) => {
+          setTimeout(() => { el.style.transition = ''; el.classList.add('visible'); }, i * 120);
         });
       }, 50);
     }
@@ -811,7 +813,7 @@
         }
       });
     }, { threshold: 0.15 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
 
     document.getElementById('langToggle').addEventListener('click', function() {
       currentLang = currentLang === 'fr' ? 'en' : 'fr';
