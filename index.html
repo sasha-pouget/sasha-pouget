@@ -131,17 +131,17 @@
       font-size: 0.7rem; font-weight: 500;
       letter-spacing: 0.22em; text-transform: uppercase;
       color: #aaa; margin-bottom: 0.8rem;
-      opacity: 0; transform: translateY(12px);
-      transition: opacity 0.6s cubic-bezier(.22,1,.36,1), transform 0.6s cubic-bezier(.22,1,.36,1);
     }
     .section-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2rem, 4.5vw, 3.2rem);
       font-weight: 600; margin-bottom: 3rem; line-height: 1.1;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity 0.8s cubic-bezier(.22,1,.36,1) 0.15s, transform 0.8s cubic-bezier(.22,1,.36,1) 0.15s;
     }
-    .section-title.visible, .section-label.visible { opacity: 1; transform: translateY(0); }
+    .reveal {
+      opacity: 0; transform: translateY(40px);
+      transition: opacity 0.9s cubic-bezier(.22,1,.36,1), transform 0.9s cubic-bezier(.22,1,.36,1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── À propos ── */
     #about { background: #f8f8f8; position: relative; }
@@ -368,21 +368,21 @@
 
   <!-- À propos -->
   <section id="about">
-    <p class="section-label" data-i18n="about_label">Profil</p>
-    <h2 class="section-title" data-i18n="about_title">À propos</h2>
+    <p class="section-label reveal" data-i18n="about_label">Profil</p>
+    <h2 class="section-title reveal" data-i18n="about_title">À propos</h2>
     <div class="about-grid">
       <div class="about-text" id="aboutText">
-        <p>
+        <p class="reveal">
           Titulaire d'un Master en management à HEC Lausanne, j'évolue dans les domaines de la communication,
           de la création de contenu et de la gestion de projets.
         </p>
-        <p>
+        <p class="reveal">
           En tant que présidente du Comité HEC, j'ai piloté la communication interne d'une communauté de
           plusieurs centaines d'étudiants. Cette expérience m'a permis de coordonner une équipe de 12 personnes,
           d'organiser des événements, de gérer les réseaux sociaux et de participer à différentes prises de
           parole officielles du comité.
         </p>
-        <p>
+        <p class="reveal">
           La création visuelle occupe une place importante dans mon travail. Je maîtrise la Suite Adobe,
           notamment Photoshop, Illustrator et InDesign, ainsi que la création de contenus vidéo et la gestion
           de projets digitaux, comme la création et la mise à jour de sites sous WordPress. J'accorde une attention particulière
@@ -391,7 +391,7 @@
           ou de l'institution qu'ils représentent.
         </p>
       </div>
-      <div class="about-side">
+      <div class="about-side reveal">
         <h3 data-i18n="side_exp">Expériences</h3>
         <ul>
           <li data-i18n="exp1">Farner Consulting — Stagiaire RP (2025)</li>
@@ -429,8 +429,8 @@
 
   <!-- Projets -->
   <section id="projets">
-    <p class="section-label" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
-    <h2 class="section-title" data-i18n="proj_title">Projets & Réalisations</h2>
+    <p class="section-label reveal" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
+    <h2 class="section-title reveal" data-i18n="proj_title">Projets & Réalisations</h2>
     <div class="projets-grid" id="projetsGrid"></div>
   </section>
 
@@ -758,11 +758,21 @@
       document.documentElement.lang = lang;
     }
 
-    // ── Section title animations ──
+    // ── Reveal animations ──
     const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-    }, { threshold: 0.2 });
-    document.querySelectorAll('.section-title, .section-label').forEach(el => observer.observe(el));
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const els = e.target.closest('section')
+            ? Array.from(e.target.closest('section').querySelectorAll('.reveal'))
+            : [e.target];
+          const idx = els.indexOf(e.target);
+          e.target.style.transitionDelay = (idx * 80) + 'ms';
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
     document.getElementById('langToggle').addEventListener('click', function() {
       currentLang = currentLang === 'fr' ? 'en' : 'fr';
