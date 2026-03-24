@@ -644,10 +644,7 @@
         const aboutBottom = aboutTop + aboutEl.offsetHeight;
         const projetsTop = document.getElementById('projets').offsetTop;
         const viewH = window.innerHeight;
-        if (sy >= projetsTop - 20) {
-          if (!down && sy <= projetsTop + 60) { snapTo('about'); return true; }
-          return false; // free scroll everywhere else
-        }
+        if (sy >= projetsTop - 20) return false; // fully free zone
 
         // Hero zone → snap to about
         if (sy < aboutTop - 60) {
