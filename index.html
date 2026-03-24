@@ -644,7 +644,10 @@
         const projetsTop = document.getElementById('projets').offsetTop;
         const viewH = window.innerHeight;
         if (sy >= projetsTop - 20) {
-          if (!down) { snapTo('projets'); return true; } // snap back up section by section
+          if (!down) {
+            if (sy <= projetsTop + 60) { snapTo('about'); return true; } // at projets top → go to about
+            else { snapTo('projets'); return true; }                      // deeper → snap to projets first
+          }
           return false; // free scroll down
         }
 
