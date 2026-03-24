@@ -373,8 +373,8 @@
 
   <!-- À propos -->
   <section id="about">
-    <p class="section-label reveal" data-i18n="about_label">Profil</p>
-    <h2 class="section-title reveal" data-i18n="about_title">À propos</h2>
+    <p class="section-label reveal-left" data-i18n="about_label">Profil</p>
+    <h2 class="section-title reveal-left" data-i18n="about_title">À propos</h2>
     <div class="about-grid">
       <div class="about-text" id="aboutText">
         <p class="reveal">
@@ -434,8 +434,8 @@
 
   <!-- Projets -->
   <section id="projets">
-    <p class="section-label reveal" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
-    <h2 class="section-title reveal" data-i18n="proj_title">Projets & Réalisations</h2>
+    <p class="section-label reveal-left" data-i18n="proj_label">Comité HEC · Réseaux Sociaux</p>
+    <h2 class="section-title reveal-left" data-i18n="proj_title">Projets & Réalisations</h2>
     <div class="projets-grid" id="projetsGrid"></div>
   </section>
 
@@ -708,29 +708,35 @@
     triggerHeroAnim();
 
     // ── About title re-animation ──
+    // Show reveal-left elements instantly on load (no animation)
+    document.querySelectorAll('.reveal-left').forEach(el => {
+      el.style.transition = 'none';
+      el.classList.add('visible');
+    });
+
     function resetAboutAnim() {
-      document.querySelectorAll('#about .section-label, #about .section-title').forEach(el => {
+      document.querySelectorAll('#about .reveal-left').forEach(el => {
         el.style.transition = 'none';
         el.classList.remove('visible');
         void el.offsetHeight;
       });
     }
     function triggerAboutAnim() {
-      document.querySelectorAll('#about .section-label, #about .section-title').forEach((el, i) => {
+      document.querySelectorAll('#about .reveal-left').forEach((el, i) => {
         setTimeout(() => { el.style.transition = ''; el.classList.add('visible'); }, i * 120);
       });
     }
 
     // ── Projets title re-animation ──
     function resetProjetsAnim() {
-      document.querySelectorAll('#projets .reveal').forEach(el => {
+      document.querySelectorAll('#projets .reveal-left').forEach(el => {
         el.style.transition = 'none';
         el.classList.remove('visible');
         void el.offsetHeight;
       });
     }
     function triggerProjetsAnim() {
-      document.querySelectorAll('#projets .reveal').forEach((el, i) => {
+      document.querySelectorAll('#projets .reveal-left').forEach((el, i) => {
         setTimeout(() => { el.style.transition = ''; el.classList.add('visible'); }, i * 120);
       });
     }
