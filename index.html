@@ -37,10 +37,10 @@
 
     /* ── Hero ── */
     #hero {
-      min-height: 100vh;
+      min-height: calc(100vh - 2cm);
       display: flex; align-items: center; justify-content: flex-start;
       text-align: left; padding: 0 8vw;
-      background: url('site web/photo.jpeg') center 15% / cover no-repeat;
+      background: url('site web/photo.jpeg') calc(center - 3cm) 15% / cover no-repeat;
       position: relative;
     }
     #hero::before {
@@ -56,10 +56,11 @@
       margin-bottom: 1.5rem;
     }
     .hero-subtitle {
-      font-size: clamp(0.8rem, 1.8vw, 1rem);
-      font-weight: 300; letter-spacing: 0.18em;
+      font-size: clamp(0.75rem, 1.4vw, 0.9rem);
+      font-weight: 300; letter-spacing: 0.12em;
       text-transform: uppercase; color: #888;
       margin-bottom: 2.5rem;
+      line-height: 2;
     }
     .btn {
       display: inline-block; padding: 0.85rem 2.5rem;
@@ -219,7 +220,7 @@
   <section id="hero">
     <div class="hero-content">
       <h1>Sasha<br>Pouget</h1>
-      <p class="hero-subtitle">Communication &middot; Relations Publiques &middot; Création de Contenu</p>
+      <p class="hero-subtitle">Communication<br>Relations Publiques<br>Création de Contenu</p>
       <a href="#projets" class="btn">Voir mes projets</a>
     </div>
   </section>
