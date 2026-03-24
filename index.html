@@ -9,7 +9,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; }
+    html { scroll-behavior: smooth; font-size: 16px; scroll-snap-type: y mandatory; }
     body { font-family: 'Inter', sans-serif; color: #111; background: #fff; }
     a { text-decoration: none; color: inherit; }
     img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
@@ -47,6 +47,7 @@
     /* ── Hero ── */
     #hero {
       min-height: 100vh;
+      scroll-snap-align: start;
       display: flex; align-items: center; justify-content: flex-start;
       text-align: left; padding: 0 8vw;
       background-color: #000;
@@ -64,8 +65,7 @@
       font-weight: 700; line-height: 0.9; letter-spacing: -0.02em;
       color: #fff;
       margin-bottom: 1rem;
-      opacity: 0; transform: translateY(30px);
-      animation: fadeUp 1s ease forwards 0.2s;
+      animation: fadeUp 1s ease both 0.2s;
     }
     .hero-subtitle {
       font-size: clamp(0.75rem, 1.4vw, 0.9rem);
@@ -73,15 +73,11 @@
       text-transform: uppercase; color: rgba(255,255,255,0.75);
       margin-bottom: 2rem;
       line-height: 2;
-      opacity: 0; transform: translateY(20px);
-      animation: fadeUp 1s ease forwards 0.6s;
-    }
-    .btn {
-      opacity: 0; transform: translateY(15px);
-      animation: fadeUp 1s ease forwards 1s;
+      animation: fadeUp 1s ease both 0.6s;
     }
     @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(28px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── Scroll arrow ── */
@@ -117,8 +113,7 @@
       font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
       color: #fff; transition: background 0.25s, color 0.25s;
-      opacity: 0; transform: translateY(15px);
-      animation: fadeUp 1s ease forwards 1s;
+      animation: fadeUp 1s ease both 1s;
     }
     .hero-btn:hover { background: #fff; color: #111; }
 
@@ -136,7 +131,7 @@
     }
 
     /* ── À propos ── */
-    #about { background: #f8f8f8; }
+    #about { background: #f8f8f8; scroll-snap-align: start; }
     .about-grid {
       display: grid; grid-template-columns: 1.6fr 1fr;
       gap: 5rem; align-items: start; max-width: 1100px;
