@@ -40,7 +40,15 @@
       min-height: 100vh;
       display: flex; align-items: center; justify-content: center;
       text-align: center; padding: 0 2rem;
+      background: url('site web/photo.jpeg') center center / cover no-repeat;
+      position: relative;
     }
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.62);
+    }
+    .hero-content { position: relative; z-index: 1; }
     .hero-content h1 {
       font-family: 'Playfair Display', serif;
       font-size: clamp(3.5rem, 11vw, 10rem);
@@ -223,28 +231,27 @@
     <div class="about-grid">
       <div class="about-text">
         <p>
-          Diplômée d'un Master en management à HEC Lausanne, je dispose d'expériences variées en communication,
-          rédaction et création de contenus multimédias.
+          Diplômée d'un Master en management à HEC Lausanne, j'ai développé un goût prononcé pour la communication
+          visuelle et la création de contenus. Ce qui a commencé comme une responsabilité au sein du Comité des
+          étudiants HEC s'est vite transformé en véritable passion.
         </p>
         <p>
-          Ancienne présidente et responsable médias du Comité des étudiants HEC, j'ai développé des compétences
-          solides en rédaction et traduction multilingue, en gestion de projets éditoriaux et en valorisation
-          d'événements académiques et culturels.
+          En tant que responsable médias, j'ai pris en charge l'ensemble de l'identité visuelle de l'association :
+          conception d'affiches événementielles, création de teasers et de réels pour Instagram, ainsi que la
+          refonte complète du site internet sous WordPress. Chaque visuel était pensé pour raconter une histoire,
+          capter l'attention et fédérer une communauté d'étudiants.
         </p>
         <p>
-          Curieuse et créative, je possède également des connaissances en finance, comptabilité, management,
-          marketing et stratégie opérationnelle.
+          Maîtrisant la Suite Adobe — Photoshop, Illustrator, InDesign — je m'attache à produire des contenus à
+          la fois esthétiques et efficaces. J'aime particulièrement travailler sur la cohérence graphique d'un
+          projet : trouver les bonnes couleurs, la bonne typographie, le bon rythme visuel pour qu'un événement
+          ou une campagne ait une vraie personnalité.
         </p>
-        <div class="tags">
-          <span class="tag">Français</span>
-          <span class="tag">Deutsch</span>
-          <span class="tag">English C2</span>
-          <span class="tag">Adobe Suite</span>
-          <span class="tag">WordPress</span>
-          <span class="tag">Pack Office</span>
-          <span class="tag">R Studio</span>
-          <span class="tag">Stata</span>
-        </div>
+        <p>
+          Cette sensibilité créative se nourrit aussi de mes expériences en relations publiques chez Farner
+          Consulting, où j'ai appris à construire des messages forts et à les décliner sur différents supports,
+          toujours avec une attention particulière portée à l'image de marque.
+        </p>
       </div>
       <div class="about-side">
         <h3>Expériences</h3>
@@ -258,12 +265,6 @@
         <ul>
           <li>Master Management, HEC Lausanne (2025)</li>
           <li>Bachelor Management & Économie, UNIL (2023)</li>
-        </ul>
-        <h3>Intérêts</h3>
-        <ul>
-          <li>Triathlon — Course Croisière EDHEC</li>
-          <li>Beach Rugby — 2e place EDHEC</li>
-          <li>Handball — Vice-championne de France U18</li>
         </ul>
       </div>
     </div>
