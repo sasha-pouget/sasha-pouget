@@ -652,11 +652,8 @@
           return false;
         }
 
-        // About zone → snap to projets at bottom, free scroll up
-        if (down) {
-          if (sy + viewH >= aboutBottom - 80) { snapTo('projets'); return true; }
-          return false;
-        }
+        // About zone → snap to projets on any downward scroll, free scroll up
+        if (down) { snapTo('projets'); return true; }
         return false;
       }
 
