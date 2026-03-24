@@ -644,8 +644,8 @@
         const projetsTop = document.getElementById('projets').offsetTop;
         const viewH = window.innerHeight;
         if (sy >= projetsTop - 20) {
-          if (!down && sy < projetsTop + viewH) { snapTo('about'); return true; }
-          return false; // free zone
+          if (!down) { snapTo('projets'); return true; } // snap back up section by section
+          return false; // free scroll down
         }
 
         // Hero zone → snap to about
@@ -708,12 +708,6 @@
     triggerHeroAnim();
 
     // ── About title re-animation ──
-    // Show reveal-left elements instantly on load (no animation)
-    document.querySelectorAll('.reveal-left').forEach(el => {
-      el.style.transition = 'none';
-      el.classList.add('visible');
-    });
-
     function resetAboutAnim() {
       document.querySelectorAll('#about .reveal-left').forEach(el => {
         el.style.transition = 'none';
@@ -829,6 +823,7 @@
       });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal, .reveal-left').forEach(el => observer.observe(el));
+
 
     document.getElementById('langToggle').addEventListener('click', function() {
       currentLang = currentLang === 'fr' ? 'en' : 'fr';
