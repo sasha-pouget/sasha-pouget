@@ -2,25 +2,316 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <title>Sasha Pouget</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sasha Pouget – Communication & RP</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
-    body {
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      background-color: #fff;
-      font-family: Arial, sans-serif;
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; color: #111; background: #fff; }
+    a { text-decoration: none; color: inherit; }
+    img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── Navigation ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid #e8e8e8;
+      padding: 0 5vw; height: 64px;
+      display: flex; align-items: center; justify-content: space-between;
     }
-    h1 {
-      font-size: 10vw;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em;
+    }
+    .nav-links { list-style: none; display: flex; gap: 2.5rem; }
+    .nav-links a {
+      font-size: 0.8rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      color: #666; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: #111; }
+
+    /* ── Hero ── */
+    #hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 0 2rem;
+    }
+    .hero-content h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.5rem, 11vw, 10rem);
+      font-weight: 700; line-height: 1; letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    .hero-subtitle {
+      font-size: clamp(0.8rem, 1.8vw, 1rem);
+      font-weight: 300; letter-spacing: 0.18em;
+      text-transform: uppercase; color: #888;
+      margin-bottom: 2.5rem;
+    }
+    .btn {
+      display: inline-block; padding: 0.85rem 2.5rem;
+      border: 1.5px solid #111;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      transition: all 0.25s;
+    }
+    .btn:hover { background: #111; color: #fff; }
+
+    /* ── Sections communes ── */
+    section { padding: 6rem 8vw; }
+    .section-label {
+      font-size: 0.7rem; font-weight: 500;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: #aaa; margin-bottom: 0.8rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.2rem);
+      font-weight: 600; margin-bottom: 3rem; line-height: 1.1;
+    }
+
+    /* ── À propos ── */
+    #about { background: #f8f8f8; }
+    .about-grid {
+      display: grid; grid-template-columns: 1.6fr 1fr;
+      gap: 5rem; align-items: start; max-width: 1100px;
+    }
+    .about-text p {
+      font-size: 1rem; line-height: 1.9; color: #333; margin-bottom: 1.4rem;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
+    .tag {
+      padding: 0.3rem 0.9rem; border: 1px solid #ddd;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.04em; border-radius: 100px; color: #555;
+    }
+    .about-side h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1rem; font-weight: 600;
+      margin-bottom: 0.7rem; margin-top: 1.8rem;
+    }
+    .about-side h3:first-child { margin-top: 0; }
+    .about-side ul { list-style: none; }
+    .about-side ul li {
+      font-size: 0.88rem; color: #555; line-height: 2;
+      padding-left: 1rem; position: relative;
+    }
+    .about-side ul li::before { content: '–'; position: absolute; left: 0; color: #ccc; }
+
+    /* ── Projets ── */
+    #projets { background: #fff; }
+    .projets-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
+    }
+    .projet-item {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/5; background: #eee; cursor: pointer;
+    }
+    .projet-item img, .projet-item video {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.45s ease;
+    }
+    .projet-item:hover img, .projet-item:hover video { transform: scale(1.05); }
+    .projet-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 60%);
+      display: flex; align-items: flex-end; padding: 1.2rem;
+      opacity: 0; transition: opacity 0.3s ease;
+    }
+    .projet-item:hover .projet-overlay { opacity: 1; }
+    .projet-overlay span { color: #fff; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; }
+
+    /* ── Contact ── */
+    #contact { background: #111; color: #fff; }
+    #contact .section-label { color: #555; }
+    #contact .section-title { color: #fff; margin-bottom: 2.5rem; }
+    .contact-links { display: flex; flex-direction: column; gap: 1.4rem; max-width: 540px; }
+    .contact-link {
+      display: flex; align-items: center; gap: 1.2rem;
+      font-size: 0.95rem; color: #bbb; transition: color 0.2s;
+    }
+    .contact-link:hover { color: #fff; }
+    .contact-link-label {
+      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: #444; min-width: 90px;
+    }
+
+    /* ── Footer ── */
+    footer {
+      background: #111; border-top: 1px solid #1e1e1e;
+      padding: 1.5rem 8vw;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    footer p { font-size: 0.72rem; color: #444; letter-spacing: 0.05em; }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .projets-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 520px) {
+      .nav-links { gap: 1.2rem; }
+      .nav-links a { font-size: 0.7rem; }
+      .projets-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
 <body>
-  <h1>Sasha Pouget</h1>
+
+  <!-- Navigation -->
+  <nav>
+    <a class="nav-logo" href="#">Sasha Pouget</a>
+    <ul class="nav-links">
+      <li><a href="#about">À propos</a></li>
+      <li><a href="#projets">Projets</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <section id="hero">
+    <div class="hero-content">
+      <h1>Sasha Pouget</h1>
+      <p class="hero-subtitle">Communication &middot; Relations Publiques &middot; Création de Contenu</p>
+      <a href="#projets" class="btn">Voir mes projets</a>
+    </div>
+  </section>
+
+  <!-- À propos -->
+  <section id="about">
+    <p class="section-label">Profil</p>
+    <h2 class="section-title">À propos</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          Diplômée d'un Master en management à HEC Lausanne, je dispose d'expériences variées en communication,
+          rédaction et création de contenus multimédias.
+        </p>
+        <p>
+          Ancienne présidente et responsable médias du Comité des étudiants HEC, j'ai développé des compétences
+          solides en rédaction et traduction multilingue, en gestion de projets éditoriaux et en valorisation
+          d'événements académiques et culturels.
+        </p>
+        <p>
+          Curieuse et créative, je possède également des connaissances en finance, comptabilité, management,
+          marketing et stratégie opérationnelle.
+        </p>
+        <div class="tags">
+          <span class="tag">Français</span>
+          <span class="tag">Deutsch</span>
+          <span class="tag">English C2</span>
+          <span class="tag">Adobe Suite</span>
+          <span class="tag">WordPress</span>
+          <span class="tag">Pack Office</span>
+          <span class="tag">R Studio</span>
+          <span class="tag">Stata</span>
+        </div>
+      </div>
+      <div class="about-side">
+        <h3>Expériences</h3>
+        <ul>
+          <li>Farner Consulting — Stagiaire RP (2025)</li>
+          <li>Verifort Capital — Investor Relations (2024)</li>
+          <li>Présidente Comité HEC (2024–2025)</li>
+          <li>Responsable Médias Comité HEC (2023–2024)</li>
+        </ul>
+        <h3>Formation</h3>
+        <ul>
+          <li>Master Management, HEC Lausanne (2025)</li>
+          <li>Bachelor Management & Économie, UNIL (2023)</li>
+        </ul>
+        <h3>Intérêts</h3>
+        <ul>
+          <li>Triathlon — Course Croisière EDHEC</li>
+          <li>Beach Rugby — 2e place EDHEC</li>
+          <li>Handball — Vice-championne de France U18</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projets -->
+  <section id="projets">
+    <p class="section-label">Comité HEC · Réseaux Sociaux</p>
+    <h2 class="section-title">Projets & Réalisations</h2>
+    <div class="projets-grid" id="projetsGrid"></div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact">
+    <p class="section-label">Restons en contact</p>
+    <h2 class="section-title">Contact</h2>
+    <div class="contact-links">
+      <a class="contact-link" href="mailto:sasha.pouget10@gmail.com">
+        <span class="contact-link-label">Email</span>
+        sasha.pouget10@gmail.com
+      </a>
+      <a class="contact-link" href="tel:+33671627831">
+        <span class="contact-link-label">Téléphone</span>
+        +33 (0)6 71 62 78 31
+      </a>
+      <span class="contact-link">
+        <span class="contact-link-label">Localisation</span>
+        Lausanne, Suisse
+      </span>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Sasha Pouget</p>
+    <p>Lausanne, Suisse</p>
+  </footer>
+
+  <script>
+    const projets = [
+      { type: 'image', file: '✒️Back to school 🖋️Le comité t\'attend dès 23h au liquors et la cave du bleu le 22 février pour .jpg', title: 'Back to School' },
+      { type: 'image', file: '🪩Bal de la rentrée 🪩Rendez-vous ce jeudi 28 septembre dès 23h pour le traditionnel BAL DE LA R.jpg', title: 'Bal de la Rentrée' },
+      { type: 'video', file: '🏆 Pétanque HEC 🏆Merci à tous d\'être venu avec votre bonne humeur et d\'avoir rendu cet évent in.mp4', title: 'Pétanque HEC' },
+      { type: 'image', file: '🍻 VERRE DES PREMIÈRES 🍻Chers étudiants, chères étudiantes,Pour finir la journée daccueil en b.jpg', title: 'Verre des Premières' },
+      { type: 'image', file: '🎃SOIRÉE HALLOWEEN🎃Chères étudiantes, chers étudiants,Le comité HEC a hâte de vous retrouver so.jpg', title: 'Soirée Halloween' },
+      { type: 'video', file: 'Hello à tous! On espère que cette édition 2025 du Bal HEC vous a plu 🪩Pourquoi pas devenir orga.mp4', title: 'Bal HEC 2025' },
+      { type: 'image', file: '🔫Laser Game🔫Le Comité HEC est de retour avec son incontournable Laser Game ! 🤩L\'évènement aur.jpg', title: 'Laser Game' },
+      { type: 'image', file: '🎅MARCHÉ DE NOËL 🎅 On vous attend le jeudi 21 décembre, de 17h30 à 22h sur l\'Esplanade d\'Intern.jpg', title: 'Marché de Noël' },
+      { type: 'image', file: '✏️Crée ton futur sweat HEC✏️ As-tu lâme dun créatif Crée le design du prochain sweat HEC Lausa.jpg', title: 'Design Sweat HEC' },
+    ];
+
+    const grid = document.getElementById('projetsGrid');
+
+    projets.forEach(p => {
+      const item = document.createElement('div');
+      item.className = 'projet-item';
+      const src = 'site web/' + p.file;
+
+      if (p.type === 'image') {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = p.title;
+        img.loading = 'lazy';
+        item.appendChild(img);
+      } else {
+        const vid = document.createElement('video');
+        vid.src = src;
+        vid.muted = true;
+        vid.loop = true;
+        vid.playsInline = true;
+        item.appendChild(vid);
+        item.addEventListener('mouseenter', () => vid.play());
+        item.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+      }
+
+      const overlay = document.createElement('div');
+      overlay.className = 'projet-overlay';
+      overlay.innerHTML = '<span>' + p.title + '</span>';
+      item.appendChild(overlay);
+      grid.appendChild(item);
+    });
+  </script>
+
 </body>
 </html>
