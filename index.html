@@ -244,15 +244,15 @@
       align-items: center; justify-content: center;
     }
     .lb-nav {
-      position: absolute; top: 50%; transform: translateY(-50%);
+      position: fixed; top: 50%; transform: translateY(-50%);
       color: #fff; font-size: 2.5rem; cursor: pointer;
       background: none; border: none; opacity: 0.6;
       transition: opacity 0.2s; padding: 0.5rem; user-select: none;
-      line-height: 1;
+      line-height: 1; z-index: 1000;
     }
     .lb-nav:hover { opacity: 1; }
-    #lb-prev { right: calc(100% + 0.5rem); }
-    #lb-next { left: calc(100% + 0.5rem); }
+    #lb-prev { left: calc(50% - 45vw - 2.5rem); }
+    #lb-next { right: calc(50% - 45vw - 2.5rem); }
 
     /* ── Contact ── */
     #contact {
