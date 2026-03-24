@@ -615,7 +615,7 @@
           const p = Math.min((now - t0) / dur, 1);
           window.scrollTo(0, startY + dist * ease(p));
           if (p < 1) requestAnimationFrame(tick);
-          else setTimeout(() => { snapping = false; }, 500);
+          else setTimeout(() => { snapping = false; }, 900);
         }
         requestAnimationFrame(tick);
       }
