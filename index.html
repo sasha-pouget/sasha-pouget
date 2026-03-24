@@ -610,7 +610,7 @@
         const dist   = targetY - startY;
         if (Math.abs(dist) < 4) return;
         snapping = true;
-        setTimeout(() => { snapping = false; }, dur + 450); // cooldown starts now
+        setTimeout(() => { snapping = false; }, dur + 1000); // cooldown starts now
         const t0 = performance.now();
         function tick(now) {
           const p = Math.min((now - t0) / dur, 1);
