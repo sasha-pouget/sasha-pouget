@@ -616,6 +616,7 @@
       function snapTo(id) {
         smoothScrollTo(document.getElementById(id).offsetTop, 450);
         if (id === 'hero') setTimeout(triggerHeroAnim, 300);
+        if (id === 'about') setTimeout(triggerAboutAnim, 300);
         if (id === 'projets') setTimeout(triggerProjetsAnim, 300);
       }
 
@@ -696,6 +697,14 @@
     }
 
     triggerHeroAnim();
+
+    // ── About title re-animation ──
+    function triggerAboutAnim() {
+      const title = document.querySelector('#about .section-title');
+      title.classList.remove('visible');
+      title.style.transitionDelay = '0ms';
+      setTimeout(() => title.classList.add('visible'), 50);
+    }
 
     // ── Projets title re-animation ──
     function triggerProjetsAnim() {
