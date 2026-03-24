@@ -50,7 +50,7 @@
       display: flex; align-items: center; justify-content: flex-start;
       text-align: left; padding: 0 8vw;
       background-color: #000;
-      background-image: url('site web/hero/image_finale.png');
+      background-image: url('site web/image_finale.png');
       background-position: right center;
       background-size: auto 100%;
       background-repeat: no-repeat;
@@ -500,8 +500,7 @@
     projets.forEach((p, idx) => {
       const item = document.createElement('div');
       item.className = 'projet-item';
-      const folder = p.type === 'image' ? 'images' : 'videos';
-      const src = 'site web/' + folder + '/' + p.file;
+      const src = 'site web/' + p.file;
 
       if (p.type === 'image') {
         const img = document.createElement('img');
@@ -515,7 +514,7 @@
         vid.muted = true;
         vid.loop = true;
         vid.playsInline = true;
-        if (p.poster) vid.poster = 'site web/posters/' + p.poster;
+        if (p.poster) vid.poster = 'site web/' + p.poster;
         item.appendChild(vid);
         item.addEventListener('mouseenter', () => vid.play());
         item.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
@@ -548,8 +547,7 @@
     function openLightbox(idx) {
       lbIndex = idx;
       const p = projets[lbIndex];
-      const folder = p.type === 'image' ? 'images' : 'videos';
-      const src = 'site web/' + folder + '/' + p.file;
+      const src = 'site web/' + p.file;
       if (lbMedia) lbMedia.remove();
       if (p.type === 'image') {
         lbMedia = document.createElement('img');
