@@ -139,54 +139,59 @@
     }
 
     /* ── À propos ── */
-    #about { background: #f8f8f8; position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
+    #about {
+      background: #fff; position: relative;
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+    }
+    .about-intro {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2.2rem);
+      font-weight: 400; line-height: 1.4; color: #111;
+      max-width: 700px; margin-bottom: 3.5rem;
+      border-left: 2px solid #111; padding-left: 1.5rem;
+    }
     .about-grid {
-      display: grid; grid-template-columns: 1.6fr 1fr;
+      display: grid; grid-template-columns: 1.5fr 1fr;
       gap: 5rem; align-items: start; max-width: 1100px;
     }
     .about-text p {
-      font-size: 1rem; line-height: 1.9; color: #333; margin-bottom: 1.4rem;
+      font-size: 0.95rem; line-height: 2; color: #555; margin-bottom: 1.2rem;
     }
-    .tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.8rem; }
-    .tag {
-      padding: 0.3rem 0.9rem; border: 1px solid #ddd;
-      font-size: 0.75rem; font-weight: 500;
-      letter-spacing: 0.04em; border-radius: 100px; color: #555;
-    }
+    .about-text p:first-child { color: #222; font-size: 1rem; }
+    .about-side { border-left: 1px solid #e8e8e8; padding-left: 2.5rem; }
     .about-side h3 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1rem; font-weight: 600;
-      margin-bottom: 0.7rem; margin-top: 1.8rem;
+      font-size: 0.65rem; font-weight: 500;
+      letter-spacing: 0.2em; text-transform: uppercase; color: #aaa;
+      margin-bottom: 0.8rem; margin-top: 2rem;
     }
     .about-side h3:first-child { margin-top: 0; }
     .about-side ul { list-style: none; }
     .about-side ul li {
-      font-size: 0.88rem; color: #555; line-height: 2;
-      padding-left: 1rem; position: relative; white-space: nowrap;
+      font-size: 0.85rem; color: #444; line-height: 1.9;
+      position: relative; white-space: nowrap;
     }
-    .about-side ul li::before { content: '–'; position: absolute; left: 0; color: #ccc; }
     .key-numbers {
-      margin-top: 1.8rem; display: flex; flex-direction: column; gap: 1rem;
-      border-top: 1px solid #e8e8e8; padding-top: 1.6rem;
+      margin-top: 2rem; display: flex; flex-direction: column; gap: 1.2rem;
+      border-top: 1px solid #e8e8e8; padding-top: 2rem;
     }
-    .key-number { display: flex; flex-direction: column; gap: 0.1rem; }
+    .key-number { display: flex; align-items: baseline; gap: 0.8rem; }
     .kn-value {
       font-family: 'Playfair Display', serif;
-      font-size: 1.7rem; font-weight: 600; line-height: 1; color: #111;
-      letter-spacing: -0.02em;
+      font-size: 1.6rem; font-weight: 600; line-height: 1; color: #111;
+      letter-spacing: -0.02em; min-width: 60px;
     }
-    .kn-plus { font-size: 1rem; vertical-align: super; margin-left: 1px; }
+    .kn-plus { font-size: 0.9rem; vertical-align: super; margin-left: 1px; }
     .kn-label {
-      font-family: 'Playfair Display', serif;
-      font-size: 0.75rem; font-weight: 400; font-style: italic; color: #888;
+      font-size: 0.72rem; color: #999; letter-spacing: 0.06em;
     }
     .insta-link {
       display: inline-flex; align-items: center; gap: 0.5rem;
-      margin-top: 1.2rem; font-size: 0.75rem; font-weight: 500;
-      font-family: 'Playfair Display', serif; font-style: italic;
-      color: #777; transition: color 0.2s;
+      margin-top: 1.5rem; font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #999; transition: color 0.2s; border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 0.3rem;
     }
-    .insta-link:hover { color: #111; }
+    .insta-link:hover { color: #111; border-bottom-color: #111; }
 
     /* ── Projets ── */
     #projets { background: #fff; }
@@ -253,9 +258,9 @@
     #contact .section-label { color: #444; }
     .contact-tagline {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(2.2rem, 5vw, 4rem);
-      font-weight: 600; line-height: 1.15; color: #fff;
-      margin-bottom: 3.5rem; max-width: 600px;
+      font-size: clamp(1.9rem, 3.5vw, 3rem);
+      font-weight: 600; line-height: 1.2; color: #fff;
+      margin-bottom: 3.5rem; max-width: 500px;
     }
     .contact-tagline em { font-style: italic; color: #888; }
     .contact-items { display: flex; flex-direction: column; }
@@ -350,6 +355,7 @@
   <section id="about">
     <p class="section-label" data-i18n="about_label">Profil</p>
     <h2 class="section-title" data-i18n="about_title">À propos</h2>
+    <p class="about-intro" data-i18n="about_intro">Communication, création visuelle &amp; gestion de projets.</p>
     <div class="about-grid">
       <div class="about-text" id="aboutText">
         <p>
@@ -641,6 +647,7 @@
         hero_btn: 'Voir mes projets',
         about_label: 'Profil',
         about_title: 'À propos',
+        about_intro: 'Communication, création visuelle &amp; gestion de projets.',
         about_body: `<p>Titulaire d'un Master en management à HEC Lausanne, j'évolue dans les domaines de la communication, de la création de contenu et de la gestion de projets.</p><p>En tant que présidente du Comité HEC, j'ai piloté la communication interne d'une communauté de plusieurs centaines d'étudiants. Cette expérience m'a permis de coordonner une équipe de 12 personnes, d'organiser des événements, de gérer les réseaux sociaux et de participer à différentes prises de parole officielles du comité.</p><p>La création visuelle occupe une place importante dans mon travail. Je maîtrise la Suite Adobe, notamment Photoshop, Illustrator et InDesign, ainsi que la création de contenus vidéo et la gestion de projets digitaux, comme la création et la mise à jour de sites sous WordPress. J'accorde une attention particulière à l'identité visuelle, à la clarté des messages et à la cohérence de chaque support. Mon objectif est de créer des contenus qui soient à la fois soignés, cohérents et fidèles à l'image de la marque ou de l'organisation qu'ils représentent.</p>`,
         side_exp: 'Expériences',
         exp1: 'Farner Consulting — Stagiaire RP (2025)',
@@ -667,6 +674,7 @@
         hero_btn: 'View my work',
         about_label: 'Profile',
         about_title: 'About',
+        about_intro: 'Communication, visual creation &amp; project management.',
         about_body: `<p>Holding a Master's degree in Management from HEC Lausanne, I work in the fields of communication, content creation, and project management.</p><p>As President of the HEC Committee, I led internal communication for a community of several hundred students. This experience allowed me to coordinate a team of 12 people, organize events, manage social media, and contribute to various official communications on behalf of the committee.</p><p>Visual creation plays an important role in my work. I am proficient in Adobe Suite, especially Photoshop, Illustrator, and InDesign, as well as video content creation and digital project management, including building and updating websites on WordPress. I pay close attention to visual identity, clear messaging, and consistency across all materials. My goal is to create content that is polished, consistent, and aligned with the image of the brand or organisation it represents.</p>`,
         side_exp: 'Experience',
         exp1: 'Farner Consulting — PR Intern (2025)',
