@@ -630,7 +630,11 @@
         const aboutTop = aboutEl.offsetTop;
         const aboutBottom = aboutTop + aboutEl.offsetHeight;
         const projetsTop = document.getElementById('projets').offsetTop;
-        if (sy >= projetsTop - 20) return false; // free zone
+        const viewH = window.innerHeight;
+        if (sy >= projetsTop - 20) {
+          if (!down && sy < projetsTop + viewH) { snapTo('about'); return true; }
+          return false; // free zone
+        }
 
         // Hero zone → snap to about
         if (sy < aboutTop - 60) {
@@ -639,7 +643,6 @@
         }
 
         // About zone → scroll freely inside, snap at edges
-        const viewH = window.innerHeight;
         if (down) {
           if (sy + viewH >= aboutBottom - 80) { snapTo('projets'); return true; }
           return false; // let about scroll freely
