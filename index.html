@@ -645,11 +645,8 @@
         const projetsTop = document.getElementById('projets').offsetTop;
         const viewH = window.innerHeight;
         if (sy >= projetsTop - 20) {
-          if (!down) {
-            if (sy <= projetsTop + 60) { snapTo('about'); return true; } // at projets top → go to about
-            else { snapTo('projets'); return true; }                      // deeper → snap to projets first
-          }
-          return false; // free scroll down
+          if (!down && sy <= projetsTop + 60) { snapTo('about'); return true; }
+          return false; // free scroll everywhere else
         }
 
         // Hero zone → snap to about
