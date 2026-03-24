@@ -10,7 +10,7 @@
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
     html { scroll-behavior: smooth; font-size: 16px; scroll-snap-type: y proximity; }
-    body { font-family: 'Inter', sans-serif; color: #111; background: #fff; }
+    body { font-family: 'Inter', sans-serif; color: #111; background: #fff; scroll-behavior: smooth; }
     a { text-decoration: none; color: inherit; }
     img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
@@ -65,7 +65,6 @@
       font-weight: 700; line-height: 0.9; letter-spacing: -0.02em;
       color: #fff;
       margin-bottom: 1rem;
-      opacity: 0; transform: translateY(36px); transition: none;
     }
     .hero-subtitle {
       font-size: clamp(0.75rem, 1.4vw, 0.9rem);
@@ -73,17 +72,6 @@
       text-transform: uppercase; color: rgba(255,255,255,0.75);
       margin-bottom: 2rem;
       line-height: 2;
-      opacity: 0; transform: translateY(24px); transition: none;
-    }
-    .hero-btn {
-      opacity: 0; transform: translateY(16px); transition: none;
-    }
-    .hero-anim h1   { animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) both 0.1s; }
-    .hero-anim .hero-subtitle { animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) both 0.35s; }
-    .hero-anim .hero-btn      { animation: fadeUp 0.9s cubic-bezier(.22,1,.36,1) both 0.6s; }
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(36px); }
-      to   { opacity: 1; transform: translateY(0); }
     }
 
     /* ── Scroll arrow ── */
@@ -125,9 +113,8 @@
       border: 1.5px solid rgba(255,255,255,0.8);
       font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      color: #fff;
+      color: #fff; transition: background 0.25s, color 0.25s;
     }
-    .hero-anim .hero-btn { transition: background 0.25s, color 0.25s; }
     .hero-btn:hover { background: #fff; color: #111; }
 
     /* ── Sections communes ── */
@@ -480,13 +467,31 @@
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
 
     // ── Hero animations ──
-    window.addEventListener('load', () => {
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          document.getElementById('hero').classList.add('hero-anim');
-        });
+    (function() {
+      const h1  = document.querySelector('.hero-content h1');
+      const sub = document.querySelector('.hero-subtitle');
+      const btn = document.querySelector('.hero-btn');
+      const ease = 'opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)';
+
+      [h1, sub, btn].forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(40px)';
       });
-    });
+
+      function reveal(el, delay) {
+        setTimeout(() => {
+          el.style.transition = ease;
+          el.style.opacity = '1';
+          el.style.transform = 'translateY(0)';
+        }, delay);
+      }
+
+      window.addEventListener('load', () => {
+        reveal(h1,  200);
+        reveal(sub, 500);
+        reveal(btn, 800);
+      });
+    }());
 
     // ── Translations ──
     const translations = {
