@@ -624,7 +624,7 @@
       function snapTo(id) {
         if (id === 'about' && _aboutVisited) resetAboutAnim();
         if (id === 'projets' && _projetsVisited) resetProjetsAnim();
-        smoothScrollTo(document.getElementById(id).offsetTop, 160);
+        smoothScrollTo(document.getElementById(id).offsetTop, 200);
         if (id === 'hero') setTimeout(triggerHeroAnim, 380);
         if (id === 'about') { _aboutVisited = true; setTimeout(triggerAboutAnim, 380); }
         if (id === 'projets') { _projetsVisited = true; setTimeout(triggerProjetsAnim, 380); }
