@@ -672,7 +672,7 @@
         let lastWheelTime = 0;
         window.addEventListener('wheel', function(e) {
           const now = Date.now();
-          const newGesture = (now - lastWheelTime) > 200;
+          const newGesture = (now - lastWheelTime) > 50;
           lastWheelTime = now;
           if (snapping) { e.preventDefault(); return; }
           if (!newGesture) { e.preventDefault(); return; } // same gesture → block
