@@ -126,6 +126,40 @@
     .projet-item:hover .projet-overlay { opacity: 1; }
     .projet-overlay span { color: #fff; font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em; }
 
+    /* ── Play icon ── */
+    .play-icon {
+      position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+      width: 52px; height: 52px; border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      display: flex; align-items: center; justify-content: center;
+      pointer-events: none; transition: opacity 0.3s;
+    }
+    .play-icon::after {
+      content: ''; display: block;
+      width: 0; height: 0;
+      border-style: solid;
+      border-width: 9px 0 9px 18px;
+      border-color: transparent transparent transparent #111;
+      margin-left: 3px;
+    }
+    .projet-item:hover .play-icon { opacity: 0; }
+
+    /* ── Lightbox ── */
+    #lightbox {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(0,0,0,0.92);
+      align-items: center; justify-content: center;
+    }
+    #lightbox.open { display: flex; }
+    #lightbox-media { max-width: 90vw; max-height: 90vh; object-fit: contain; border-radius: 2px; }
+    #lightbox-close {
+      position: absolute; top: 1.2rem; right: 1.5rem;
+      color: #fff; font-size: 2rem; cursor: pointer;
+      background: none; border: none; line-height: 1; opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    #lightbox-close:hover { opacity: 1; }
+
     /* ── Contact ── */
     #contact { background: #111; color: #fff; }
     #contact .section-label { color: #555; }
@@ -262,6 +296,11 @@
     </div>
   </section>
 
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <button id="lightbox-close">&times;</button>
+  </div>
+
   <!-- Footer -->
   <footer>
     <p>© 2025 Sasha Pouget</p>
@@ -270,15 +309,15 @@
 
   <script>
     const projets = [
-      { type: 'image', file: '✒️Back to school 🖋️Le comité t\'attend dès 23h au liquors et la cave du bleu le 22 février pour .jpg', title: 'Back to School' },
-      { type: 'image', file: '🪩Bal de la rentrée 🪩Rendez-vous ce jeudi 28 septembre dès 23h pour le traditionnel BAL DE LA R.jpg', title: 'Bal de la Rentrée' },
-      { type: 'video', file: '🏆 Pétanque HEC 🏆Merci à tous d\'être venu avec votre bonne humeur et d\'avoir rendu cet évent in.mp4', title: 'Pétanque HEC' },
-      { type: 'image', file: '🍻 VERRE DES PREMIÈRES 🍻Chers étudiants, chères étudiantes,Pour finir la journée daccueil en b.jpg', title: 'Verre des Premières' },
-      { type: 'image', file: '🎃SOIRÉE HALLOWEEN🎃Chères étudiantes, chers étudiants,Le comité HEC a hâte de vous retrouver so.jpg', title: 'Soirée Halloween' },
-      { type: 'video', file: 'Hello à tous! On espère que cette édition 2025 du Bal HEC vous a plu 🪩Pourquoi pas devenir orga.mp4', title: 'Bal HEC 2025' },
-      { type: 'image', file: '🔫Laser Game🔫Le Comité HEC est de retour avec son incontournable Laser Game ! 🤩L\'évènement aur.jpg', title: 'Laser Game' },
-      { type: 'image', file: '🎅MARCHÉ DE NOËL 🎅 On vous attend le jeudi 21 décembre, de 17h30 à 22h sur l\'Esplanade d\'Intern.jpg', title: 'Marché de Noël' },
-      { type: 'image', file: '✏️Crée ton futur sweat HEC✏️ As-tu lâme dun créatif Crée le design du prochain sweat HEC Lausa.jpg', title: 'Design Sweat HEC' },
+      { type: 'image', file: 'back-to-school.jpg',   title: 'Back to School' },
+      { type: 'image', file: 'bal-rentree.jpg',       title: 'Bal de la Rentrée' },
+      { type: 'video', file: 'petanque-hec.mp4',      title: 'Pétanque HEC' },
+      { type: 'image', file: 'verre-premieres.jpg',   title: 'Verre des Premières' },
+      { type: 'image', file: 'halloween.jpg',         title: 'Soirée Halloween' },
+      { type: 'video', file: 'bal-hec-2025.mp4',      title: 'Bal HEC 2025' },
+      { type: 'image', file: 'laser-game.jpg',        title: 'Laser Game' },
+      { type: 'image', file: 'marche-noel.jpg',       title: 'Marché de Noël' },
+      { type: 'image', file: 'sweat-hec.jpg',         title: 'Design Sweat HEC' },
     ];
 
     const grid = document.getElementById('projetsGrid');
@@ -303,14 +342,56 @@
         item.appendChild(vid);
         item.addEventListener('mouseenter', () => vid.play());
         item.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
+        // Play icon badge
+        const playIcon = document.createElement('div');
+        playIcon.className = 'play-icon';
+        item.appendChild(playIcon);
       }
 
       const overlay = document.createElement('div');
       overlay.className = 'projet-overlay';
       overlay.innerHTML = '<span>' + p.title + '</span>';
       item.appendChild(overlay);
+
+      // Lightbox on click
+      item.addEventListener('click', () => openLightbox(p.type, src));
+
       grid.appendChild(item);
     });
+
+    // Lightbox logic
+    const lb = document.getElementById('lightbox');
+    const closeBtn = document.getElementById('lightbox-close');
+    let lbMedia = null;
+
+    function openLightbox(type, src) {
+      if (lbMedia) lbMedia.remove();
+      if (type === 'image') {
+        lbMedia = document.createElement('img');
+        lbMedia.src = src;
+        lbMedia.id = 'lightbox-media';
+      } else {
+        lbMedia = document.createElement('video');
+        lbMedia.src = src;
+        lbMedia.id = 'lightbox-media';
+        lbMedia.controls = true;
+        lbMedia.autoplay = true;
+        lbMedia.playsInline = true;
+      }
+      lb.appendChild(lbMedia);
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('open');
+      if (lbMedia) { lbMedia.remove(); lbMedia = null; }
+      document.body.style.overflow = '';
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
   </script>
 
 </body>
