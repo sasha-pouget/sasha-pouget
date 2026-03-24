@@ -693,13 +693,13 @@
       els.forEach(el => {
         el.style.transition = 'none';
         el.style.opacity = '0';
-        el.style.transform = 'translateY(40px)';
+        el.style.transform = 'translateX(-50px)';
       });
       els.forEach((el, i) => {
         setTimeout(() => {
           el.style.transition = _heroEase;
           el.style.opacity = '1';
-          el.style.transform = 'translateY(0)';
+          el.style.transform = 'translateX(0)';
         }, _heroFirstLoad ? _heroDelays[i] : [50, 300][i]);
       });
       _heroFirstLoad = false;
