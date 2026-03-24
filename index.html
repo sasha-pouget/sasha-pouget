@@ -27,6 +27,7 @@
       font-family: 'Playfair Display', serif;
       font-size: 1.15rem; font-weight: 600; letter-spacing: 0.02em;
     }
+    .nav-right { display: flex; align-items: center; }
     .nav-links { list-style: none; display: flex; gap: 2.5rem; }
     .nav-links a {
       font-size: 0.8rem; font-weight: 500;
@@ -232,12 +233,14 @@
   <!-- Navigation -->
   <nav>
     <a class="nav-logo" href="#">Sasha Pouget</a>
-    <ul class="nav-links">
-      <li><a href="#about" data-i18n="nav_about">À propos</a></li>
-      <li><a href="#projets" data-i18n="nav_projects">Projets</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-    <button class="lang-btn" id="langToggle">EN</button>
+    <div class="nav-right">
+      <ul class="nav-links">
+        <li><a href="#about" data-i18n="nav_about">À propos</a></li>
+        <li><a href="#projets" data-i18n="nav_projects">Projets</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+      <button class="lang-btn" id="langToggle">EN</button>
+    </div>
   </nav>
 
   <!-- Hero -->
@@ -256,33 +259,20 @@
     <div class="about-grid">
       <div class="about-text" id="aboutText">
         <p>
-          Diplômée d'un Master en management à HEC Lausanne, spécialisation Stratégie Opérationnelle et
-          Leadership, je me suis construite à l'intersection de la communication, de la création de contenu
-          et de la gestion de projets. Mon parcours m'a appris que les meilleures communications sont celles
-          qui créent une véritable adhésion — pas seulement de la visibilité.
+          Master en management à HEC Lausanne, je travaille à l'intersection de la communication,
+          de la création de contenu et de la gestion de projets.
         </p>
         <p>
-          En tant que présidente du Comité des étudiants HEC, j'ai orchestré la communication interne d'une
-          communauté de plusieurs centaines d'étudiants : pilotage d'une équipe de 12 personnes, organisation
-          d'événements structurants (Bal HEC, conférences, activités sportives et culturelles), animation des
-          réseaux sociaux et gestion de l'ensemble des prises de parole institutionnelles. Cette expérience
-          m'a donné une compréhension concrète de ce que signifie engager une communauté dans la durée.
+          Présidente du Comité HEC, j'ai piloté la communication interne d'une communauté de plusieurs centaines
+          d'étudiants — équipe de 12 personnes, événements, réseaux sociaux, prises de parole institutionnelles.
         </p>
         <p>
-          En parallèle, mon rôle de responsable médias m'a permis de développer une vraie maîtrise des outils
-          créatifs — Suite Adobe (Photoshop, Illustrator, InDesign), création de contenus visuels et vidéo,
-          refonte de site internet sous WordPress. J'accorde une grande importance à la cohérence graphique et
-          éditoriale : chaque contenu doit refléter l'identité d'une organisation et s'adresser juste.
+          En parallèle, j'ai développé une maîtrise des outils créatifs (Adobe Suite, vidéo, WordPress)
+          et une approche rigoureuse de la cohérence graphique et éditoriale.
         </p>
         <p>
-          Mon stage en relations publiques chez Farner Consulting à Lausanne m'a quant à lui exposée à des
-          enjeux de communication plus stratégiques : rédaction et révision de contenus multilingues,
-          monitoring médias, accompagnement de clients sur leur image de marque. J'y ai renforcé ma capacité
-          à adapter un message à des audiences très différentes, avec rigueur et sens du détail.
-        </p>
-        <p>
-          Curieuse, polyvalente et engagée, je suis convaincue que la communication interne est un levier
-          puissant pour renforcer la culture d'une institution et créer un sentiment d'appartenance durable.
+          Mon stage chez Farner Consulting m'a exposée à des enjeux de communication stratégique :
+          contenus multilingues, monitoring médias, conseil en image de marque.
         </p>
       </div>
       <div class="about-side">
@@ -441,7 +431,7 @@
         hero_btn: 'Voir mes projets',
         about_label: 'Profil',
         about_title: 'À propos',
-        about_body: `<p>Diplômée d'un Master en management à HEC Lausanne, spécialisation Stratégie Opérationnelle et Leadership, je me suis construite à l'intersection de la communication, de la création de contenu et de la gestion de projets. Mon parcours m'a appris que les meilleures communications sont celles qui créent une véritable adhésion — pas seulement de la visibilité.</p><p>En tant que présidente du Comité des étudiants HEC, j'ai orchestré la communication interne d'une communauté de plusieurs centaines d'étudiants : pilotage d'une équipe de 12 personnes, organisation d'événements structurants (Bal HEC, conférences, activités sportives et culturelles), animation des réseaux sociaux et gestion de l'ensemble des prises de parole institutionnelles. Cette expérience m'a donné une compréhension concrète de ce que signifie engager une communauté dans la durée.</p><p>En parallèle, mon rôle de responsable médias m'a permis de développer une vraie maîtrise des outils créatifs — Suite Adobe (Photoshop, Illustrator, InDesign), création de contenus visuels et vidéo, refonte de site internet sous WordPress. J'accorde une grande importance à la cohérence graphique et éditoriale : chaque contenu doit refléter l'identité d'une organisation et s'adresser juste.</p><p>Mon stage en relations publiques chez Farner Consulting à Lausanne m'a quant à lui exposée à des enjeux de communication plus stratégiques : rédaction et révision de contenus multilingues, monitoring médias, accompagnement de clients sur leur image de marque. J'y ai renforcé ma capacité à adapter un message à des audiences très différentes, avec rigueur et sens du détail.</p><p>Curieuse, polyvalente et engagée, je suis convaincue que la communication interne est un levier puissant pour renforcer la culture d'une institution et créer un sentiment d'appartenance durable.</p>`,
+        about_body: `<p>Master en management à HEC Lausanne, je travaille à l'intersection de la communication, de la création de contenu et de la gestion de projets.</p><p>Présidente du Comité HEC, j'ai piloté la communication interne d'une communauté de plusieurs centaines d'étudiants — équipe de 12 personnes, événements, réseaux sociaux, prises de parole institutionnelles.</p><p>En parallèle, j'ai développé une maîtrise des outils créatifs (Adobe Suite, vidéo, WordPress) et une approche rigoureuse de la cohérence graphique et éditoriale.</p><p>Mon stage chez Farner Consulting m'a exposée à des enjeux de communication stratégique : contenus multilingues, monitoring médias, conseil en image de marque.</p>`,
         side_exp: 'Expériences',
         exp1: 'Farner Consulting — Stagiaire RP (2025)',
         exp2: 'Verifort Capital — Investor Relations (2024)',
@@ -462,7 +452,7 @@
         hero_btn: 'View my work',
         about_label: 'Profile',
         about_title: 'About',
-        about_body: `<p>With a Master's in Management from HEC Lausanne (Operational Strategy & Leadership), I've built my profile at the crossroads of communication, content creation, and project management. My experience has taught me that the best communications are those that create genuine buy-in — not just visibility.</p><p>As president of the HEC Student Committee, I led internal communications for a community of several hundred students: managing a team of 12, organising flagship events (HEC Ball, conferences, sports and cultural activities), running social media channels, and overseeing all institutional messaging. This role gave me a hands-on understanding of what it takes to engage a community over time.</p><p>Alongside this, my role as Media Manager allowed me to develop strong creative skills — Adobe Suite (Photoshop, Illustrator, InDesign), visual and video content production, and website redesign on WordPress. I place great importance on visual and editorial consistency: every piece of content should reflect an organisation's identity and speak to its audience with precision.</p><p>My public relations internship at Farner Consulting in Lausanne exposed me to more strategic communication challenges: drafting and editing multilingual content, media monitoring, and supporting clients on their brand image. I strengthened my ability to tailor messages for very different audiences, with rigour and attention to detail.</p><p>Curious, versatile, and driven, I believe internal communication is a powerful lever for strengthening institutional culture and fostering a lasting sense of belonging.</p>`,
+        about_body: `<p>Master's in Management from HEC Lausanne, working at the crossroads of communication, content creation, and project management.</p><p>As president of the HEC Student Committee, I led internal communications for a community of several hundred students — team of 12, events, social media, and all institutional messaging.</p><p>I developed strong creative skills (Adobe Suite, video, WordPress) alongside a rigorous approach to visual and editorial consistency.</p><p>My internship at Farner Consulting exposed me to strategic communication: multilingual content, media monitoring, and brand image consulting.</p>`,
         side_exp: 'Experience',
         exp1: 'Farner Consulting — PR Intern (2025)',
         exp2: 'Verifort Capital — Investor Relations (2024)',
