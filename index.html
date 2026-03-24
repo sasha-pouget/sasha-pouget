@@ -9,8 +9,8 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; font-size: 16px; scroll-snap-type: y mandatory; }
-    body { font-family: 'Inter', sans-serif; color: #111; background: #fff; scroll-behavior: smooth; }
+    html { font-size: 16px; }
+    body { font-family: 'Inter', sans-serif; color: #111; background: #fff; }
     a { text-decoration: none; color: inherit; }
     img, video { display: block; width: 100%; height: 100%; object-fit: cover; }
 
@@ -47,8 +47,6 @@
     /* ── Hero ── */
     #hero {
       min-height: 100vh;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
       display: flex; align-items: center; justify-content: flex-start;
       text-align: left; padding: 0 8vw;
       background-color: #000;
@@ -132,7 +130,7 @@
     }
 
     /* ── À propos ── */
-    #about { background: #f8f8f8; scroll-snap-align: start; scroll-snap-stop: always; position: relative; }
+    #about { background: #f8f8f8; position: relative; }
     .about-grid {
       display: grid; grid-template-columns: 1.6fr 1fr;
       gap: 5rem; align-items: start; max-width: 1100px;
@@ -160,7 +158,7 @@
     .about-side ul li::before { content: '–'; position: absolute; left: 0; color: #ccc; }
 
     /* ── Projets ── */
-    #projets { background: #fff; scroll-snap-align: start; scroll-snap-stop: always; }
+    #projets { background: #fff; }
     .projets-grid {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.2rem;
     }
@@ -217,7 +215,7 @@
     #lightbox-close:hover { opacity: 1; }
 
     /* ── Contact ── */
-    #contact { background: #111; color: #fff; scroll-snap-align: start; scroll-snap-stop: always; }
+    #contact { background: #111; color: #fff; }
     #contact .section-label { color: #555; }
     #contact .section-title { color: #fff; margin-bottom: 2.5rem; }
     .contact-links { display: flex; flex-direction: column; gap: 1.4rem; max-width: 540px; }
@@ -466,6 +464,56 @@
     closeBtn.addEventListener('click', closeLightbox);
     lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closeLightbox(); });
+
+    // ── Section snapping (hero → about → projets, then free) ──
+    (function() {
+      const order = ['hero', 'about', 'projets'];
+      let snapping = false;
+      let touchY0 = 0;
+
+      function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
+
+      function snapTo(id) {
+        const targetY = document.getElementById(id).offsetTop;
+        const startY  = window.scrollY;
+        const dist    = targetY - startY;
+        if (Math.abs(dist) < 4) { snapping = false; return; }
+        snapping = true;
+        const t0 = performance.now();
+        const dur = 280;
+        function tick(now) {
+          const p = Math.min((now - t0) / dur, 1);
+          window.scrollTo(0, startY + dist * ease(p));
+          if (p < 1) requestAnimationFrame(tick);
+          else snapping = false;
+        }
+        requestAnimationFrame(tick);
+      }
+
+      function handle(down) {
+        if (snapping) return true; // block
+        const sy = window.scrollY;
+        const projetsTop = document.getElementById('projets').offsetTop;
+        if (sy >= projetsTop - 20) return false; // free zone
+        let cur = 0;
+        for (let i = 0; i < order.length; i++) {
+          if (sy >= document.getElementById(order[i]).offsetTop - 60) cur = i;
+        }
+        if (down && cur < order.length - 1) { snapTo(order[cur + 1]); return true; }
+        if (!down && cur > 0)               { snapTo(order[cur - 1]); return true; }
+        return false;
+      }
+
+      window.addEventListener('wheel', function(e) {
+        if (handle(e.deltaY > 0)) e.preventDefault();
+      }, { passive: false });
+
+      window.addEventListener('touchstart', e => { touchY0 = e.touches[0].clientY; }, { passive: true });
+      window.addEventListener('touchend', function(e) {
+        const dy = touchY0 - e.changedTouches[0].clientY;
+        if (Math.abs(dy) > 40) handle(dy > 0);
+      }, { passive: true });
+    }());
 
     // ── Hero animations ──
     (function() {
