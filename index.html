@@ -323,10 +323,10 @@
     const projets = [
       { type: 'image', file: 'back-to-school.jpg',   title: 'Back to School' },
       { type: 'image', file: 'bal-rentree.jpg',       title: 'Bal de la Rentrée' },
-      { type: 'video', file: 'petanque-hec.mp4',      title: 'Pétanque HEC' },
+      { type: 'video', file: 'petanque-hec.mp4',      title: 'Pétanque HEC',   poster: 'poster-petanque.jpg' },
       { type: 'image', file: 'verre-premieres.jpg',   title: 'Verre des Premières' },
       { type: 'image', file: 'halloween.jpg',         title: 'Soirée Halloween' },
-      { type: 'video', file: 'bal-hec-2025.mp4',      title: 'Bal HEC 2025' },
+      { type: 'video', file: 'bal-hec-2025.mp4',      title: 'Bal HEC 2025',   poster: 'poster-bal-hec.jpg' },
       { type: 'image', file: 'laser-game.jpg',        title: 'Laser Game' },
       { type: 'image', file: 'marche-noel.jpg',       title: 'Marché de Noël' },
       { type: 'image', file: 'sweat-hec.jpg',           title: 'Design Sweat HEC' },
@@ -335,7 +335,7 @@
       { type: 'image', file: 'petanque-affiche.jpg',   title: 'Pétanque HEC' },
       { type: 'image', file: 'before.jpg',             title: 'Before' },
       { type: 'image', file: 'comedy-show.jpg',        title: 'HEC Comedy Show' },
-      { type: 'video', file: 'tresor-bleu.mp4',        title: "Trés'Or Bleu" },
+      { type: 'video', file: 'tresor-bleu.mp4',        title: "Trés'Or Bleu",   poster: 'poster-tresor-bleu.jpg' },
       { type: 'image', file: 'weekend-ski.jpg',        title: 'Week-end Ski' },
       { type: 'image', file: 'verre-masters.jpg',      title: 'Verre des Masters' },
       { type: 'image', file: 'fluo.jpg',               title: 'Fluo' },
@@ -360,6 +360,7 @@
         vid.muted = true;
         vid.loop = true;
         vid.playsInline = true;
+        if (p.poster) vid.poster = 'site web/' + p.poster;
         item.appendChild(vid);
         item.addEventListener('mouseenter', () => vid.play());
         item.addEventListener('mouseleave', () => { vid.pause(); vid.currentTime = 0; });
