@@ -37,41 +37,40 @@
 
     /* ── Hero ── */
     #hero {
-      min-height: calc(100vh - 2cm);
+      min-height: 100vh;
       display: flex; align-items: flex-end; justify-content: flex-start;
-      text-align: left; padding: 0 8vw 5rem;
-      background: url('site web/PHOTO-2026-03-24-19-02-09.jpg') right top / auto 130% no-repeat;
+      text-align: left; padding: 0 4vw 2rem;
+      background: url('site web/PHOTO-2026-03-24-19-02-09.jpg') center top / cover no-repeat;
       position: relative;
     }
     #hero::before {
       content: '';
       position: absolute; inset: 0;
-      background:
-        linear-gradient(to right, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 30%, rgba(255,255,255,0.6) 55%, rgba(255,255,255,0) 75%),
-        linear-gradient(to top, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 30%);
+      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 50%);
     }
     .hero-content { position: relative; z-index: 1; }
     .hero-content h1 {
       font-family: 'Playfair Display', serif;
-      font-size: clamp(3.5rem, 11vw, 10rem);
-      font-weight: 700; line-height: 1; letter-spacing: -0.02em;
-      margin-bottom: 1.5rem;
+      font-size: clamp(4rem, 13vw, 12rem);
+      font-weight: 700; line-height: 0.9; letter-spacing: -0.02em;
+      color: #fff;
+      margin-bottom: 1rem;
     }
     .hero-subtitle {
       font-size: clamp(0.75rem, 1.4vw, 0.9rem);
       font-weight: 300; letter-spacing: 0.12em;
-      text-transform: uppercase; color: #888;
-      margin-bottom: 2.5rem;
+      text-transform: uppercase; color: rgba(255,255,255,0.75);
+      margin-bottom: 2rem;
       line-height: 2;
     }
     .btn {
       display: inline-block; padding: 0.85rem 2.5rem;
-      border: 1.5px solid #111;
+      border: 1.5px solid rgba(255,255,255,0.8);
       font-size: 0.75rem; font-weight: 500;
       letter-spacing: 0.12em; text-transform: uppercase;
-      transition: all 0.25s;
+      color: #fff; transition: all 0.25s;
     }
-    .btn:hover { background: #111; color: #fff; }
+    .btn:hover { background: #fff; color: #111; }
 
     /* ── Sections communes ── */
     section { padding: 6rem 8vw; }
