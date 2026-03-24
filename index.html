@@ -495,12 +495,12 @@
         if (Math.abs(dist) < 4) { snapping = false; return; }
         snapping = true;
         const t0 = performance.now();
-        const dur = 280;
+        const dur = 560;
         function tick(now) {
           const p = Math.min((now - t0) / dur, 1);
           window.scrollTo(0, startY + dist * ease(p));
           if (p < 1) requestAnimationFrame(tick);
-          else snapping = false;
+          else setTimeout(() => { snapping = false; }, 500);
         }
         requestAnimationFrame(tick);
       }
