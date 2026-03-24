@@ -246,19 +246,46 @@
     #lightbox-close:hover { opacity: 1; }
 
     /* ── Contact ── */
-    #contact { background: #111; color: #fff; }
-    #contact .section-label { color: #555; }
-    #contact .section-title { color: #fff; margin-bottom: 2.5rem; }
-    .contact-links { display: flex; flex-direction: column; gap: 1.4rem; max-width: 540px; }
+    #contact {
+      background: #111; color: #fff;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    #contact .section-label { color: #444; }
+    .contact-tagline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 600; line-height: 1.15; color: #fff;
+      margin-bottom: 3.5rem; max-width: 600px;
+    }
+    .contact-tagline em { font-style: italic; color: #888; }
+    .contact-items { display: flex; flex-direction: column; }
     .contact-link {
-      display: flex; align-items: center; gap: 1.2rem;
-      font-size: 0.95rem; color: #bbb; transition: color 0.2s;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.3rem 0; border-top: 1px solid #222;
+      color: #888; transition: color 0.25s; text-decoration: none;
     }
+    .contact-link:last-child { border-bottom: 1px solid #222; }
     .contact-link:hover { color: #fff; }
+    .contact-link-left { display: flex; align-items: center; gap: 1.2rem; }
     .contact-link-label {
-      font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
-      color: #444; min-width: 90px;
+      font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: #333; min-width: 100px;
     }
+    .contact-link-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 400;
+    }
+    .contact-link-arrow {
+      font-size: 1.1rem; opacity: 0; transform: translateX(-6px);
+      transition: opacity 0.25s, transform 0.25s;
+    }
+    .contact-link:hover .contact-link-arrow { opacity: 1; transform: translateX(0); }
+    .contact-location {
+      display: flex; align-items: center; gap: 1.2rem;
+      padding: 1.3rem 0; border-top: 1px solid #222; border-bottom: 1px solid #222;
+    }
+    .contact-location .contact-link-label { color: #333; min-width: 100px; }
+    .contact-location .contact-link-value { font-family: 'Playfair Display', serif; font-size: 1.05rem; color: #555; }
 
     /* ── Footer ── */
     footer {
@@ -390,20 +417,26 @@
   <!-- Contact -->
   <section id="contact">
     <p class="section-label" data-i18n="contact_label">Restons en contact</p>
-    <h2 class="section-title">Contact</h2>
-    <div class="contact-links">
+    <p class="contact-tagline" data-i18n="contact_tagline">Une idée,<br>un projet — <em>parlons-en.</em></p>
+    <div class="contact-items">
       <a class="contact-link" href="mailto:sasha.pouget10@gmail.com">
-        <span class="contact-link-label">Email</span>
-        sasha.pouget10@gmail.com
+        <div class="contact-link-left">
+          <span class="contact-link-label">Email</span>
+          <span class="contact-link-value">sasha.pouget10@gmail.com</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
       </a>
       <a class="contact-link" href="https://www.linkedin.com/in/sasha-pouget/" target="_blank" rel="noopener">
-        <span class="contact-link-label">LinkedIn</span>
-        sasha-pouget
+        <div class="contact-link-left">
+          <span class="contact-link-label">LinkedIn</span>
+          <span class="contact-link-value">Sasha Pouget</span>
+        </div>
+        <span class="contact-link-arrow">→</span>
       </a>
-      <span class="contact-link">
+      <div class="contact-location">
         <span class="contact-link-label" data-i18n="contact_loc_label">Localisation</span>
-        <span data-i18n="contact_loc">Lausanne, Suisse</span>
-      </span>
+        <span class="contact-link-value" data-i18n="contact_loc">Lausanne, Suisse</span>
+      </div>
     </div>
   </section>
 
@@ -623,6 +656,7 @@
         proj_label: 'Comité HEC · Réseaux Sociaux',
         proj_title: 'Projets & Réalisations',
         contact_label: 'Restons en contact',
+        contact_tagline: 'Une idée,<br>un projet — <em>parlons-en.</em>',
         contact_loc_label: 'Localisation',
         contact_loc: 'Lausanne, Suisse',
       },
@@ -648,6 +682,7 @@
         proj_label: 'HEC Committee · Social Media',
         proj_title: 'Projects & Work',
         contact_label: 'Get in touch',
+        contact_tagline: 'An idea,<br>a project — <em>let\'s talk.</em>',
         contact_loc_label: 'Location',
         contact_loc: 'Lausanne, Switzerland',
       }
