@@ -215,9 +215,15 @@
       .projets-grid { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
       .projet-item { aspect-ratio: 3/4; }
     }
-    @media (max-width: 520px) {
-      .nav-links { gap: 1.2rem; }
-      .nav-links a { font-size: 0.7rem; }
+    @media (max-width: 640px) {
+      .nav-links { gap: 0.9rem; }
+      .nav-links a { font-size: 0.62rem; }
+      .lang-btn { font-size: 0.62rem; padding: 0.25rem 0.55rem; margin-left: 0.8rem; }
+    }
+    @media (max-width: 420px) {
+      .nav-links { gap: 0.6rem; }
+      .nav-links a { font-size: 0.58rem; }
+      .lang-btn { margin-left: 0.5rem; }
     }
   </style>
 </head>
