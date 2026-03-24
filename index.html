@@ -38,15 +38,15 @@
     /* ── Hero ── */
     #hero {
       min-height: 100vh;
-      display: flex; align-items: flex-end; justify-content: flex-start;
-      text-align: left; padding: 0 4vw 2rem;
-      background: url('site web/PHOTO-2026-03-24-19-02-09.jpg') center top / cover no-repeat;
+      display: flex; align-items: center; justify-content: flex-start;
+      text-align: left; padding: 0 8vw;
+      background: url('site web/IMG_2638.JPG') 65% center / cover no-repeat;
       position: relative;
     }
     #hero::before {
       content: '';
       position: absolute; inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.45) 0%, rgba(0,0,0,0) 50%);
+      background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.3) 35%, rgba(0,0,0,0) 65%);
     }
     .hero-content { position: relative; z-index: 1; }
     .hero-content h1 {
@@ -220,7 +220,7 @@
   <!-- Hero -->
   <section id="hero">
     <div class="hero-content">
-      <h1>Sasha Pouget</h1>
+      <h1>Sasha<br>Pouget</h1>
       <p class="hero-subtitle">Communication<br>Relations Publiques<br>Création de Contenu</p>
       <a href="#projets" class="btn">Voir mes projets</a>
     </div>
@@ -320,7 +320,13 @@
       { type: 'video', file: 'bal-hec-2025.mp4',      title: 'Bal HEC 2025' },
       { type: 'image', file: 'laser-game.jpg',        title: 'Laser Game' },
       { type: 'image', file: 'marche-noel.jpg',       title: 'Marché de Noël' },
-      { type: 'image', file: 'sweat-hec.jpg',         title: 'Design Sweat HEC' },
+      { type: 'image', file: 'sweat-hec.jpg',           title: 'Design Sweat HEC' },
+      { type: 'image', file: 'save-the-date.jpg',      title: 'Save the Date' },
+      { type: 'image', file: 'cest-ma-question.jpg',   title: "C'est ma Question" },
+      { type: 'image', file: 'petanque-affiche.jpg',   title: 'Pétanque HEC' },
+      { type: 'image', file: 'before.jpg',             title: 'Before' },
+      { type: 'image', file: 'comedy-show.jpg',        title: 'HEC Comedy Show' },
+      { type: 'video', file: 'tresor-bleu.mp4',        title: "Trés'Or Bleu" },
     ];
 
     const grid = document.getElementById('projetsGrid');
