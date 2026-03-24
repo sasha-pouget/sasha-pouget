@@ -646,20 +646,18 @@
         const viewH = window.innerHeight;
         if (sy >= projetsTop - 20) return false; // fully free zone
 
-        // Hero zone → snap to about
+        // Hero zone → snap to about on scroll down
         if (sy < aboutTop - 60) {
           if (down) { snapTo('about'); return true; }
           return false;
         }
 
-        // About zone → scroll freely inside, snap at edges
+        // About zone → snap to projets at bottom, free scroll up
         if (down) {
           if (sy + viewH >= aboutBottom - 80) { snapTo('projets'); return true; }
-          return false; // let about scroll freely
-        } else {
-          if (sy <= aboutTop + 80) { snapTo('hero'); return true; }
-          return false; // scroll freely within about
+          return false;
         }
+        return false;
       }
 
       if (window.innerWidth > 900) {
