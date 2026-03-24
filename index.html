@@ -522,14 +522,12 @@
 
       function ease(t) { return t < 0.5 ? 2*t*t : -1+(4-2*t)*t; }
 
-      function snapTo(id) {
-        const targetY = document.getElementById(id).offsetTop;
-        const startY  = window.scrollY;
-        const dist    = targetY - startY;
-        if (Math.abs(dist) < 4) { snapping = false; return; }
+      function smoothScrollTo(targetY, dur) {
+        const startY = window.scrollY;
+        const dist   = targetY - startY;
+        if (Math.abs(dist) < 4) return;
         snapping = true;
         const t0 = performance.now();
-        const dur = 450;
         function tick(now) {
           const p = Math.min((now - t0) / dur, 1);
           window.scrollTo(0, startY + dist * ease(p));
@@ -538,6 +536,16 @@
         }
         requestAnimationFrame(tick);
       }
+
+      function snapTo(id) {
+        smoothScrollTo(document.getElementById(id).offsetTop, 450);
+      }
+
+      // Hero button: animated scroll to projets
+      document.querySelector('.hero-btn').addEventListener('click', function(e) {
+        e.preventDefault();
+        smoothScrollTo(document.getElementById('projets').offsetTop, 900);
+      });
 
       function handle(down) {
         if (snapping) return true; // block
