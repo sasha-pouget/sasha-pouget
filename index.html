@@ -615,6 +615,7 @@
 
       function snapTo(id) {
         smoothScrollTo(document.getElementById(id).offsetTop, 450);
+        if (id === 'hero') setTimeout(triggerHeroAnim, 300);
       }
 
       // Hero button: animated scroll to projets
@@ -664,29 +665,30 @@
     }());
 
     // ── Hero animations ──
-    (function() {
-      const h1  = document.querySelector('.hero-content h1');
-      const sub = document.querySelector('.hero-subtitle');
-      const btn = document.querySelector('.hero-btn');
-      const ease = 'opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)';
+    const _heroEls = [
+      document.querySelector('.hero-content h1'),
+      document.querySelector('.hero-subtitle'),
+      document.querySelector('.hero-btn')
+    ];
+    const _heroEase = 'opacity 1s cubic-bezier(.22,1,.36,1), transform 1s cubic-bezier(.22,1,.36,1)';
+    const _heroDelays = [50, 300, 550];
 
-      [h1, sub, btn].forEach(el => {
+    function triggerHeroAnim() {
+      _heroEls.forEach(el => {
+        el.style.transition = 'none';
         el.style.opacity = '0';
         el.style.transform = 'translateY(40px)';
       });
-
-      function reveal(el, delay) {
+      _heroEls.forEach((el, i) => {
         setTimeout(() => {
-          el.style.transition = ease;
+          el.style.transition = _heroEase;
           el.style.opacity = '1';
           el.style.transform = 'translateY(0)';
-        }, delay);
-      }
+        }, _heroDelays[i]);
+      });
+    }
 
-      reveal(h1,   50);
-      reveal(sub, 300);
-      reveal(btn, 550);
-    }());
+    triggerHeroAnim();
 
     // ── Translations ──
     const translations = {
