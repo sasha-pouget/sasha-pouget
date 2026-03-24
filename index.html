@@ -827,6 +827,9 @@
       });
     }, { threshold: 0.15 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    if (window.innerWidth <= 900) {
+      document.querySelectorAll('.reveal-left').forEach(el => observer.observe(el));
+    }
 
 
     document.getElementById('langToggle').addEventListener('click', function() {
